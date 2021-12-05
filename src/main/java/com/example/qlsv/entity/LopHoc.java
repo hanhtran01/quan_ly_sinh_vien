@@ -3,7 +3,9 @@ package com.example.qlsv.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Data
@@ -25,4 +27,8 @@ public class LopHoc {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Collection<TKB> tkb;
+
+    @OneToMany()
+    @JoinColumn(name = "ma_lop")
+    private List<SinhVien> sinhVien = new ArrayList<>();
 }

@@ -1,22 +1,19 @@
-package com.example.qlsv.model.dto;
+package com.example.qlsv.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class BangDiemSvDto {
-    private int mssv;
-
-    private String name;
-
     private String maHP;
 
+    private String tenMon;
+
     private float diem;
+
 }

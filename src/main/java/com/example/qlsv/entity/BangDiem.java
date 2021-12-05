@@ -11,6 +11,7 @@ import javax.persistence.*;
 public class BangDiem {
     @Id
     @GeneratedValue
+    @Column(name = "id")
     private long id;
 
     @Column(name = "diem")
@@ -28,4 +29,6 @@ public class BangDiem {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private MonHoc monHoc;
+
+
 }

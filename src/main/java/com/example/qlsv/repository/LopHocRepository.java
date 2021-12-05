@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LopHocRepository extends JpaRepository<LopHoc, Integer> {
+
 }

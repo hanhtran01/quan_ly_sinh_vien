@@ -14,6 +14,9 @@ public class TKB {
     @Column(name = "id")
     private long id;
 
+    @Column(name = "lich_hoc")
+    private String lichHoc;
+
     @ManyToOne
     @JoinColumn(name = "ma_hp")
     @EqualsAndHashCode.Exclude

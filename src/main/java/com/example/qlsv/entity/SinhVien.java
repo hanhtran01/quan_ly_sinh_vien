@@ -3,7 +3,7 @@ package com.example.qlsv.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.*;
 
 @Entity
 @Data
@@ -16,12 +16,15 @@ public class SinhVien {
     @Column(name = "ten_sv")
     private String name;
 
-    @Column(name = "ava")
+    @Column(name = "avatar")
     private String ava;
+
+    @Column(name = "buoi_vang")
+    private int buoiVang;
 
     @OneToMany(mappedBy = "sinhVien", cascade = CascadeType.ALL)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private Collection<BangDiem> bangDiem;
+    private List<BangDiem> bangDiem;
 
 }
