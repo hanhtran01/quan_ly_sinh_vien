@@ -1,6 +1,7 @@
 # quan_ly_sinh_vien
 * Được viết trên Windows
 * Sử dụng IDE IntelliJ: Spring boot, loombook, hibernate
+* Đang trong quá trình hoàn thiện, chưa phải bản cuối cùng...
 * Code trên MySQL
 ```php
 
