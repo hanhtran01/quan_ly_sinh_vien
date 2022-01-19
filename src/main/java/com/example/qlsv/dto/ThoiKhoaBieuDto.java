@@ -14,6 +14,10 @@ public class ThoiKhoaBieuDto {
 
     private String tenMon;
 
+    private int soTin;
+
+    private String loaiLop;
+
     private String idGV;
 
     private String lichHoc;

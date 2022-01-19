@@ -15,7 +15,7 @@ import java.util.List;
 public class LopHoc {
     @Id
     @Column(name = "ma_lop")
-    private int maLop;
+    private int maLop = 0;
 
     @Column(name = "ten_lop")
     private String tenLop;

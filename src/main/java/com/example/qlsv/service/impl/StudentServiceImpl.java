@@ -23,8 +23,8 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     public MonHocRepository monHocRepository;
 
-    @Autowired
-    public SinhVienRepository sinhVienRepository;
+/*    @Autowired
+    public SinhVienRepository sinhVienRepository;*/
 
     @Autowired
     public TKBRepository tkbRepository;
@@ -36,6 +36,26 @@ public class StudentServiceImpl implements StudentService {
     public List<SinhVien> getListStu() {
         //System.out.println("Debug...." + StuRepository.findAll());
         return StuRepository.findAll();
+    }
+
+    @Override
+    public List<ThoiKhoaBieuDto> getListTKB() {
+        List<TKB> tkbList = tkbRepository.findAll();
+        List<ThoiKhoaBieuDto> result = new ArrayList<>();
+        for (TKB user : tkbList) {
+            ThoiKhoaBieuDto tmp = ThoiKhoaBieuDto.builder()
+                    .maHP(user.getMonHoc().getMaHP())
+                    .maLop(user.getLopHoc().getMaLop())
+                    .tenMon(user.getMonHoc().getTenMon())
+                    .soTin(user.getMonHoc().getSoTin())
+                    .loaiLop(user.getMonHoc().getLoaiLop())
+                    .idGV(user.getGiangVien().getId())
+                    .lichHoc(user.getLichHoc())
+                    .diaDiem(user.getLopHoc().getDiaDiem())
+                    .build();
+            result.add(tmp);
+        }
+        return result;
     }
 
     @Override
@@ -69,7 +89,7 @@ public class StudentServiceImpl implements StudentService {
 
         List<BangDiem> bangDiem = bangDiemRepository.getBangDiemByMonHoc(monHoc);
         for(BangDiem user : bangDiem) {
-            BangDiemLopDto tmp = new BangDiemLopDto(user.getSinhVien().getMssv(), user.getSinhVien().getName(), user.getDiem());
+            BangDiemLopDto tmp = new BangDiemLopDto(maLop, user.getMonHoc().getMaHP(), tkb.getGiangVien().getName() ,user.getSinhVien().getMssv(), user.getSinhVien().getName(), user.getDiem());
             result.add(tmp);
         }
         return result;
@@ -105,6 +125,8 @@ public class StudentServiceImpl implements StudentService {
         }
         return result;
     }
+
+
     /*-----------------------------*/
     @Override
     public SinhVien addSinhVien(int mssv, String name) {
@@ -117,10 +139,51 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public BangDiem addBangDiem(int mssv, String maHP, float diem) {
         BangDiem tmp = new BangDiem();
-        tmp.setSinhVien(sinhVienRepository.getSinhVienByMssv(mssv));
+        tmp.setSinhVien(StuRepository.getSinhVienByMssv(mssv));
         tmp.setMonHoc(monHocRepository.getMonHocByMaHP(maHP));
         tmp.setDiem(diem);
         return tmp;
+    }
+
+    @Override
+    public List<ThoiKhoaBieuDto> getTkbLecturer(String id) {
+        List<ThoiKhoaBieuDto> result = new ArrayList<>();
+        List<TKB> tkbList = tkbRepository.getTKBByGiangVien_Id(id);
+        for (TKB user : tkbList) {
+            ThoiKhoaBieuDto tmp = ThoiKhoaBieuDto.builder()
+                    .maHP(user.getMonHoc().getMaHP())
+                    .maLop(user.getLopHoc().getMaLop())
+                    .tenMon(user.getMonHoc().getTenMon())
+                    .idGV(user.getGiangVien().getId())
+                    .lichHoc(user.getLichHoc())
+                    .diaDiem(user.getLopHoc().getDiaDiem())
+                    .build();
+            result.add(tmp);
+        }
+        return result;
+    }
+
+    @Override
+    public List<ThoiKhoaBieuDto> getTKB_maLop(int maLop) {
+        TKB user = tkbRepository.getTKBByLopHoc_MaLop(maLop);
+        List<TKB> test = tkbRepository.getAllByLopHoc_MaLop(maLop);
+        if (test.isEmpty()) {
+            return getListTKB();
+        }
+        List<ThoiKhoaBieuDto> result = new ArrayList<>();
+        ThoiKhoaBieuDto tmp = ThoiKhoaBieuDto.builder()
+                .maHP(user.getMonHoc().getMaHP())
+                .maLop(user.getLopHoc().getMaLop())
+                .tenMon(user.getMonHoc().getTenMon())
+                .soTin(user.getMonHoc().getSoTin())
+                .loaiLop(user.getMonHoc().getLoaiLop())
+                .idGV(user.getGiangVien().getId())
+                .lichHoc(user.getLichHoc())
+                .diaDiem(user.getLopHoc().getDiaDiem())
+                .build();
+         result.add(tmp);
+
+        return result;
     }
 
 }

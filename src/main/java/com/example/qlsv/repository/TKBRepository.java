@@ -13,4 +13,6 @@ public interface TKBRepository extends JpaRepository<TKB, Long> {
     TKB getTKBByLopHoc(LopHoc lopHoc);
     TKB getTKBByLopHoc_MaLop(int maLop);
     TKB getTKBByMonHoc(MonHoc monHoc);
+    List<TKB> getTKBByGiangVien_Id(String id);
+    List<TKB> getAllByLopHoc_MaLop(int maLop);
 }

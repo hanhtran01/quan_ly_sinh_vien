@@ -8,9 +8,18 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class BangDiemLopDto {
+
+    private int maLop;
+
+    private String maHp;
+
+    private String tenGv;
+
     private int mssv;
 
     private String name;
 
     private float diem;
+
+
 }
